@@ -573,6 +573,11 @@ class GameEngine:
         """Create a trade offer"""
         import uuid
         
+        # Validate trade initiator (must be their turn or "security check")
+        current_turn_player = self.get_current_player()
+        if not current_turn_player or current_turn_player.id != proposer_id:
+            return False, "Trades can only be initiated during your turn."
+
         # Validate properties have no houses
         for prop_idx in offer_props + request_props:
             if prop_idx not in self.state.board_state:
@@ -778,4 +783,14 @@ class GameEngine:
                 "end_time": self.state.active_auction.end_time,
             } if self.state.active_auction else None,
             "settings": self.state.settings,
+            "active_trade": {
+                "id": self.state.active_trade.id,
+                "proposer_id": self.state.active_trade.proposer_id,
+                "target_player_id": self.state.active_trade.target_player_id,
+                "offer_cash": self.state.active_trade.offer_cash,
+                "offer_properties": self.state.active_trade.offer_properties,
+                "request_cash": self.state.active_trade.request_cash,
+                "request_properties": self.state.active_trade.request_properties,
+                "status": self.state.active_trade.status,
+            } if self.state.active_trade else None,
         }

@@ -361,6 +361,42 @@ async def restart_game(sid, data):
     else:
         await sio.emit("error", {"code": "RESTART_FAILED", "message": message}, to=sid)
 
+@sio.event
+async def create_trade_offer(sid, data):
+    room_id = next((r for r in sio.rooms(sid) if r != sid), None)
+    if not room_id or room_id not in games: return
+    engine = games[room_id]
+    
+    target_id = data.get("target_id")
+    offer_cash = data.get("offer_cash", 0)
+    offer_props = data.get("offer_props", [])
+    request_cash = data.get("request_cash", 0)
+    request_props = data.get("request_props", [])
+    
+    success, message = engine.create_trade_offer(sid, target_id, offer_cash, offer_props, request_cash, request_props)
+    
+    if success:
+        await sio.emit("game_state_update", engine.get_state(), room=room_id)
+        # Notify target? Game state update handles it if UI reacts to active_trade
+        target_sid = target_id # Verify if we need to emit specifically? No, broadcast state is fine.
+    else:
+        await sio.emit("error", {"code": "TRADE_FAILED", "message": message}, to=sid)
+
+@sio.event
+async def respond_to_trade(sid, data):
+    room_id = next((r for r in sio.rooms(sid) if r != sid), None)
+    if not room_id or room_id not in games: return
+    engine = games[room_id]
+    
+    accept = data.get("accept", False)
+    success, message = engine.respond_to_trade(sid, accept)
+    
+    if success:
+        await sio.emit("game_state_update", engine.get_state(), room=room_id)
+    else:
+        await sio.emit("error", {"code": "TRADE_RESPONSE_FAILED", "message": message}, to=sid)
+
+
 @app.get("/health")
 async def health():
     return {"status": "ok"}

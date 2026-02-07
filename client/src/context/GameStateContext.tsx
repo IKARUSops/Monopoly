@@ -99,7 +99,8 @@ export const GameStateProvider = ({ children }: { children: ReactNode }) => {
     };
 
     useEffect(() => {
-        const newSocket = io("http://localhost:8000", {
+        const socketUrl = process.env.NODE_ENV === "production" ? undefined : "http://localhost:8000";
+        const newSocket = io(socketUrl, {
             transports: ["websocket", "polling"],
             reconnectionAttempts: 5,
         });

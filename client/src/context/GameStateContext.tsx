@@ -4,20 +4,6 @@ import React, { createContext, useContext, useReducer, useEffect, ReactNode, use
 import { io, Socket } from "socket.io-client";
 import ToastContainer from "@/components/ToastContainer";
 
-interface GameState {
-    room_id: string;
-    players: any[];
-    board_state: Record<number, any>;
-    current_turn_index: number;
-    total_turns_played: number;
-    dice_roll: number[];
-    turn_phase: string;
-    game_status: string;
-    logs: string[];
-    turn_end_timestamp: number | null;
-    [key: string]: any;
-}
-
 interface Toast {
     id: string;
     message: string;

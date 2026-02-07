@@ -75,7 +75,7 @@ const BOARD_CONFIG: Record<number, { name: string; type: string }> = {
     57: { name: "New York", type: "PROPERTY" },
     58: { name: "Wealth Tax", type: "TAX" },
     59: { name: "Comm Chest", type: "COMMUNITY_CHEST" },
-    59: { name: "Comm Chest", type: "COMMUNITY_CHEST" },
+    // 59: { name: "Comm Chest", type: "COMMUNITY_CHEST" },
 };
 
 const ASSET_MAP: Record<string, string> = {

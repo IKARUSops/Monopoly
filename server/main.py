@@ -403,5 +403,8 @@ async def health():
 
 if os.path.exists("./client/out"):
     app.mount("/", StaticFiles(directory="./client/out", html=True), name="static")
-
+elif os.path.exists("../client/out"): # Fallback for Docker pathing
+    app.mount("/", StaticFiles(directory="../client/out", html=True), name="static")
+elif os.path.exists("client/out"): # Fallback for Docker pathing
+    app.mount("/", StaticFiles(directory="client/out", html=True), name="static")
 app = socket_app

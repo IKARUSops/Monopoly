@@ -1,0 +1,97 @@
+@import "tailwindcss";
+@source "../**/*.{js,ts,jsx,tsx}";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #020617;
+  --foreground: #f8fafc;
+}
+
+body {
+  color: var(--foreground);
+  background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glow-border {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glow-border:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Board Layout Utilities */
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(18, minmax(0, 1fr));
+  grid-template-rows: repeat(18, minmax(0, 1fr));
+  width: 96vmin;
+  height: 96vmin;
+  margin: 0 auto;
+}
+
+/* Property Groups Neon Glows */
+.group-gray {
+  border-top: 4px solid #94a3b8;
+}
+
+.group-brown {
+  border-top: 4px solid #78350f;
+}
+
+.group-lt-blue {
+  border-top: 4px solid #38bdf8;
+}
+
+.group-pink {
+  border-top: 4px solid #f472b6;
+}
+
+.group-teal {
+  border-top: 4px solid #2dd4bf;
+}
+
+.group-orange {
+  border-top: 4px solid #fb923c;
+}
+
+.group-red {
+  border-top: 4px solid #f87171;
+}
+
+.group-yellow {
+  border-top: 4px solid #facc15;
+}
+
+.group-green {
+  border-top: 4px solid #4ade80;
+}
+
+.group-indigo {
+  border-top: 4px solid #818cf8;
+}
+
+.group-violet {
+  border-top: 4px solid #a78bfa;
+}
+
+.group-dk-blue {
+  border-top: 4px solid #2563eb;
+}

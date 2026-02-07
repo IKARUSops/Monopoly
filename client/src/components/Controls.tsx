@@ -31,7 +31,7 @@ export default function Controls() {
             const now = Date.now() / 1000;
             if (now > state.turn_end_timestamp!) {
                 console.log("Timer expired! Auto-ending turn...");
-                if (me.cash < 0) {
+                if (me && me.cash < 0) {
                     socket?.emit("declare_bankruptcy", {});
                 } else {
                     socket?.emit("end_turn", {});
@@ -41,7 +41,7 @@ export default function Controls() {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [isMyTurn, state.turn_end_timestamp, state.game_status, me.cash, socket]);
+    }, [isMyTurn, state.turn_end_timestamp, state.game_status, me?.cash, socket]);
 
     const rollDice = () => {
         setIsRolling(true);

@@ -2,6 +2,10 @@
 
 A modern, real-time multiplayer board game featuring an expanded 60-space board with advanced gameplay mechanics.
 
+## Live Game:
+
+https://monopoly-b56j.onrender.com/
+ 
 ## 🎮 Features
 
 ### Core Gameplay
